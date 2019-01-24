@@ -104,7 +104,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.4)
     config (1.7.0)
       activesupport (>= 3.0)
       deep_merge (~> 1.2.1)
@@ -179,9 +179,9 @@ GEM
       archive-zip (~> 0.7)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    globalize (5.1.0)
-      activemodel (>= 4.2, < 5.2)
-      activerecord (>= 4.2, < 5.2)
+    globalize (5.2.0)
+      activemodel (>= 4.2, < 5.3)
+      activerecord (>= 4.2, < 5.3)
       request_store (~> 1.0)
     guard (2.14.2)
       formatador (>= 0.2.4)
@@ -283,7 +283,7 @@ GEM
       pry (~> 0.11)
       yard (~> 0.9.11)
     public_suffix (3.0.3)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-livereload (0.3.17)
       rack
     rack-test (1.1.0)
@@ -440,7 +440,7 @@ DEPENDENCIES
   factory_bot_rails (~> 4.0)
   friendly_id
   geckodriver-helper
-  globalize (~> 5.1.0)
+  globalize (~> 5.2.0)
   guard-livereload (~> 2.5)
   guard-rspec
   httparty
