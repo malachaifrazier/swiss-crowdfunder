@@ -283,7 +283,7 @@ GEM
       pry (~> 0.11)
       yard (~> 0.9.11)
     public_suffix (3.0.3)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-livereload (0.3.17)
       rack
     rack-test (1.1.0)
