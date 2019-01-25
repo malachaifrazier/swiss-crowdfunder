@@ -3,14 +3,44 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
+abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-require 'support/factory_bot'
-
+# Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rails'
-#Capybara.default_driver = :selenium_chrome
+require 'capybara/rspec'
+require 'selenium/webdriver'
+require 'devise'
 
+require 'bundler/setup'
+::Bundler.require(:default, :test)
 
+# ---------------------- Begin Capybara configurations ----------------------
+Capybara.register_driver :selenium do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  # The window size is important for screenshots
+  options.add_argument '--window-size=1366,768'
+  Selenium::WebDriver::Chrome.driver_path = '/usr/local/bin/chromedriver'
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.javascript_driver = :selenium
+Capybara.asset_host        = 'http://localhost:3000'
+Capybara.server            = :webrick
+
+# Avoids problems related to config.action_mailer.default_url_options  when
+# trying to follow links in e-mails
+Capybara.always_include_port = true
+
+# The default wait time of 2 seconds sometimes generates false
+# positives (tests fail only because it took more than 2 secs for the page to
+# load).
+Capybara.default_max_wait_time = 5
+
+# Allows finding and interacting with hidden elements. Useful when working
+# with default browser elements that are hidden by Bootstrap (e.g., file
+# input fields).
+Capybara.ignore_hidden_elements = false
+# ---------------------- End Capybara configurations ----------------------
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -27,7 +57,7 @@ require 'capybara/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -37,10 +67,46 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
+  # Display all JavaScript errors (from the headless browser console) when
+  # running JS-enabled feature specs with Selenium and Chrome. Should also
+  # work with Firefox.
+  class JavaScriptError < StandardError; end
+  RSpec.configure do |config|
+    config.after(:each, type: :feature, js: true) do
+      errors = page.driver
+                   .browser
+                   .manage
+                   .logs
+                   .get(:browser)
+                   .select { |e| e.level == 'SEVERE' && e.message.present? }
+                   .map(&:message)
+                   .to_a
+      raise JavaScriptError, errors.join("\n\n") if errors.present?
+    end
+  end
+
+  # ------------------- Begin Database Cleaner config --------------------
   config.use_transactional_fixtures = true
+
+  config.before(:suite) do
+    # Perform the initial DB cleaning by truncating all the tables
+    # DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+  # Using #append_after instead of #after is very important to avoid race
+  # conditions between tests.
+  config.append_after(:each) do
+    DatabaseCleaner.clean
+  end
+  # ------------------- End Database Cleaner config ---------------------
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
