@@ -85,9 +85,6 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 # Alain uses PG also for dev and testing to mimic the live server
 if `hostname` == 'debzen'
   gem 'pg'
