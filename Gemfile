@@ -7,8 +7,6 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 
 # Unicorn as app
 gem 'unicorn'
@@ -27,13 +25,13 @@ gem 'config'
 gem 'country_select'
 gem 'devise'
 gem 'exception_notification'
-gem 'factory_bot_rails', '~> 4.0'
+gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
 gem 'friendly_id'
-gem 'globalize', '~> 5.1.0'
+gem 'globalize', '~> 5.2'
 gem 'httparty'
 gem 'jquery-rails'
 gem 'mini_magick'
-gem 'rails-i18n', '~> 5.0.0'
+gem 'rails-i18n', '~> 5.1', '>= 5.1.2'
 gem 'redcarpet'
 gem 'simple_form'
 gem 'timecop'
@@ -51,9 +49,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a
-  # debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara'
   gem 'guard-livereload', '~> 2.5', require: false
@@ -61,15 +56,15 @@ group :development, :test do
   gem 'launchy'
   gem 'rack-livereload'
   gem 'rspec-rails', '~> 3.6'
+  gem 'pry-rails'
 end
 
 group :development do
-  gem 'capistrano', '~> 3.6'
-  gem 'capistrano-rails', '~> 1.3'
-  gem 'capistrano-rbenv', '~> 2.1'
+  gem 'capistrano', '~> 3.11'
+  gem 'capistrano-rails', '~> 1.4'
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'pry'
   gem 'pry-doc'
   # Spring speeds up development by keeping your application running
   # in the background. Read more: https://github.com/rails/spring
