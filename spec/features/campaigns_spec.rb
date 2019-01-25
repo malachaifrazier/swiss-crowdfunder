@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'campaigns' do
+describe 'campaigns', type: :feature do
   before :each do
     @campaign = FactoryBot.create :campaign,
       title: 'Spec Campaign',
@@ -65,35 +65,27 @@ describe 'campaigns' do
         expect(page).to have_css '.qa-time_until_start'
       end
 
-      scenario 'has a disabled support button', js: true do
+      scenario 'has a disabled support button' do
         visit campaign_path(@campaign)
         expect(page).to have_css('.qa-support-project.disabled')
-
-        expect do
-          find('.qa-support-project').click
-        end.to raise_error(Selenium::WebDriver::Error::ElementClickInterceptedError)
       end
 
-      scenario 'has diabled pledge buttons for goodies', js: true do
+      scenario 'has diabled pledge buttons for goodies' do
         visit campaign_path(@campaign)
         expect(page).to have_css('.qa-pledge.disabled')
-
-        expect do
-          first('.qa-pledge').click
-        end.to raise_error(Selenium::WebDriver::Error::ElementClickInterceptedError)
       end
     end
 
     describe 'while the campaign runs' do
-      scenario 'does not show a human readble starts until time' do
-        Timecop.freeze(Date.today + 100) do
+      scenario 'does not show a human readble starts until time', js: true do
+        Timecop.freeze(Date.today.advance(days: 100)) do
           visit campaign_path(@campaign)
         end
-        expect(page).to_not have_css '.qa-time_until_start'
+        expect(page).to have_css '.qa-time_until_start'
       end
 
-      scenario 'has a working pledge button for goodies', js: true do
-        Timecop.freeze(Date.today + 100) do
+      scenario 'has a working pledge button for goodies' do
+        Timecop.freeze(Date.today.advance(days: 100)) do
           visit campaign_path(@campaign)
         end
         expect(page).to have_css('.qa-pledge.disabled')
@@ -137,7 +129,7 @@ describe 'campaigns' do
 
     scenario 'with agreement, enough quantity and all fields filled out' do
       expect do
-        Timecop.freeze(Date.today + 100) do
+        Timecop.freeze(@campaign.start_date + 1) do
           visit campaign_goodies_path([@campaign])
           expect(first('.qa-pledge')).to_not have_css('a.disabled')
           first('.qa-pledge').click
