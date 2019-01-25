@@ -35,6 +35,7 @@ gem 'rails-i18n', '~> 5.1', '>= 5.1.2'
 gem 'redcarpet'
 gem 'simple_form'
 gem 'timecop'
+gem 'pg'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -75,10 +76,6 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
-group :production, :test do
-  # Postgres
-  gem 'pg'
-end
 
 group :test do
   gem 'database_cleaner'
