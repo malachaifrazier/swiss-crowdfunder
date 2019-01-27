@@ -77,7 +77,7 @@ describe 'campaigns', type: :feature do
     end
 
     describe 'while the campaign runs' do
-      scenario 'does not show a human readble starts until time', js: true do
+      scenario 'does not show a human readble starts until time' do
         Timecop.freeze(Date.today.advance(days: 100)) do
           visit campaign_path(@campaign)
         end

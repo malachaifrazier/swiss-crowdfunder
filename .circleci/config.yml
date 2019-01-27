@@ -2,17 +2,18 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: circleci/ruby:2.4.1-node-browsers
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-    # Service container image available at `host: localhost`
-
+          SELENIUM_DRIVER_URL: http://127.0.0.1:4444/wd/hub
+      # - image: selenium/standalone-chrome:3.5.3
       - image: circleci/postgres:9.6.2-alpine
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
+          POSTGRES_PASSWORD: ""
 
     working_directory: ~/crowdfunder
 
@@ -30,6 +31,7 @@ jobs:
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
+
       # Bundle with caching strategy
       - restore_cache:
           key: circlev2-{{ checksum "Gemfile.lock" }}
@@ -41,6 +43,21 @@ jobs:
 
       # Setup the database
       - run: bundle exec rake db:setup
+
+      # - run:
+      #     name: Download Selenium
+      #     command: |
+      #       curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      # - run:
+      #     name: Start Selenium
+      #     command: |
+      #       java -jar selenium-server-standalone-3.5.3.jar -log selenium.log
+      #     background: true
+      # - run:
+      #     name: Start Chromedriver
+      #     command: |
+      #       java -jar selenium-server-standalone-3.5.3.jar -log selenium.log
+      #     background: true
 
       # Run the tests
       - run: bundle exec rake

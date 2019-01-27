@@ -16,11 +16,24 @@ require 'bundler/setup'
 
 # ---------------------- Begin Capybara configurations ----------------------
 Capybara.register_driver :selenium do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  # The window size is important for screenshots
-  options.add_argument '--window-size=1366,768'
-  Selenium::WebDriver::Chrome.driver_path = '/usr/local/bin/chromedriver'
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  if ENV['SELENIUM_DRIVER_URL'].present?
+    args = ["--no-default-browser-check", "--start-maximized"]
+    caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => { "args" => args })
+
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :remote,
+      url: ENV.fetch('SELENIUM_DRIVER_URL'),
+      desired_capabilities: caps
+      # desired_capabilities: :chrome
+    )
+  else
+    options = Selenium::WebDriver::Chrome::Options.new
+    # The window size is important for screenshots
+    options.add_argument '--window-size=1366,768'
+    Selenium::WebDriver::Chrome.driver_path = '/usr/local/bin/chromedriver'
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
 end
 
 Capybara.javascript_driver = :selenium
@@ -71,18 +84,16 @@ RSpec.configure do |config|
   # running JS-enabled feature specs with Selenium and Chrome. Should also
   # work with Firefox.
   class JavaScriptError < StandardError; end
-  RSpec.configure do |config|
-    config.after(:each, type: :feature, js: true) do
-      errors = page.driver
-                   .browser
-                   .manage
-                   .logs
-                   .get(:browser)
-                   .select { |e| e.level == 'SEVERE' && e.message.present? }
-                   .map(&:message)
-                   .to_a
-      raise JavaScriptError, errors.join("\n\n") if errors.present?
-    end
+  config.after(:each, type: :feature, js: true) do
+    errors = page.driver
+                 .browser
+                 .manage
+                 .logs
+                 .get(:browser)
+                 .select { |e| e.level == 'SEVERE' && e.message.present? }
+                 .map(&:message)
+                 .to_a
+    raise JavaScriptError, errors.join("\n\n") if errors.present?
   end
 
   # ------------------- Begin Database Cleaner config --------------------
