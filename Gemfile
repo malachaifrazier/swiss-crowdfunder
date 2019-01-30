@@ -50,29 +50,36 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
+  # code coverage analysis tool
+  gem 'simplecov', require: false
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara'
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'guard-rspec', require: false
+  gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'spring-commands-rspec'
   gem 'launchy'
   gem 'rack-livereload'
-  gem 'rspec-rails', '~> 3.6'
-  gem 'pry-rails'
-  # code coverage analysis tool
-  gem 'simplecov', require: false
 end
 
 group :development do
   gem 'capistrano', '~> 3.11'
   gem 'capistrano-rails', '~> 1.4'
   gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+  gem 'listen', '~> 3.1', '>= 3.1.5'
   gem 'letter_opener'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'pry-doc'
+  gem 'better_errors'
+  # Necessary to use Better Errors' advanced features (REPL, local/instance
+  # variable inspection, pretty stack frame names).
+  gem 'binding_of_caller'
+  # A static analysis security vulnerability scanner for Ruby on Rails apps
+  gem 'brakeman', require: false
   # Spring speeds up development by keeping your application running
   # in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
   # Access an IRB console on exception pages or by using `<%= console # %>`
   # anywhere in the code.
   gem 'web-console', '>= 3.3.0'
