@@ -7,16 +7,14 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 
 # Unicorn as app
 gem 'unicorn'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -85,9 +83,4 @@ group :test do
   # Required for Capyabara :firefox_headless
   gem 'geckodriver-helper'
   gem 'selenium-webdriver'
-end
-
-# Alain uses PG also for dev and testing to mimic the live server
-if `hostname` == 'debzen'
-  gem 'pg'
 end
