@@ -9,8 +9,7 @@ end
 gem 'rails', '~> 5.2.2'
 gem 'pg'
 
-# Unicorn as app
-gem 'unicorn'
+gem 'puma'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
