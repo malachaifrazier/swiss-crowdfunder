@@ -20,7 +20,7 @@ gem 'uglifier'
 
 gem 'activeadmin'
 gem 'bootstrap', '~> 4.2.1'
-gem 'carrierwave'
+gem 'aws-sdk-s3', require: false
 gem 'config'
 gem 'country_select'
 gem 'devise'
