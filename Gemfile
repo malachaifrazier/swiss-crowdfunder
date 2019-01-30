@@ -58,6 +58,8 @@ group :development, :test do
   gem 'rack-livereload'
   gem 'rspec-rails', '~> 3.6'
   gem 'pry-rails'
+  # code coverage analysis tool
+  gem 'simplecov', require: false
 end
 
 group :development do
@@ -83,4 +85,5 @@ group :test do
   # Required for Capyabara :firefox_headless
   gem 'geckodriver-helper'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', require: false
 end
