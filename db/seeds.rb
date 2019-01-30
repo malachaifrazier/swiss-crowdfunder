@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+Order.destroy_all
+Goody.destroy_all
+Campaign.destroy_all
+
 seed AdminUser, { email: 'info@ungleich.ch' },
   password: 'thahph6AuhieLu6j',
   password_confirmation: 'thahph6AuhieLu6j'
