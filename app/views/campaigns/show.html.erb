@@ -11,9 +11,11 @@
           <iframe class="embed-responsive-item" height="315" src="<%= @campaign.youtube_url %>" width="560"></iframe>
         </div>
       <% else %>
-        <%= image_tag @campaign.image.campaign, class: "mb-5" %>
+        <%= image_tag @campaign.campaign_image.variant(resize: "560x315"),
+         class: "mb-5" %>
       <% end %>
     </div>
+
     <div class="col-md-5 col-lg-4">
       <div class="progress progress_thin mb-1">
         <div class="progress-bar bg_theme" role="progressbar"
@@ -21,21 +23,25 @@
              aria-valuenow="<%= @campaign.amount_raised %>" aria-valuemin="0" aria-valuemax="<%= @campaign.goal %>">
         </div>
       </div>
+
       <div class="row">
         <div class="col-auto">
           <div class="text_loud text_theme"><%= campaign_percentage(@campaign) %></div>
         </div>
         <div class="col text-right funding_goal">
           <div class="small mt-1"><%= t '.funding_goal' %></div>
-          <strong><%= number_to_currency(@campaign.goal, precision: 0) %> </strong>
+          <strong><%= number_to_currency(@campaign.goal, precision: 0) %></strong>
         </div>
       </div>
       <hr/>
 
       <div class="d-flex align-items-end flex-wrap campaign_stat mb-2">
         <div><%= t '.funding_amount_raised' %></div>
-        <div class="text-right number"><%= number_to_currency(@campaign.amount_raised, precision: 0) %></div>
+        <div class="text-right number">
+          <%= number_to_currency(@campaign.amount_raised, precision: 0) %>
+        </div>
       </div>
+
       <div class="d-flex align-items-end flex-wrap campaign_stat mb-4">
         <div><%= t '.funding_supporters' %></div>
         <div class="text-right number"><%= @campaign.supporters.count %></div>
@@ -43,19 +49,20 @@
 
       <div class="campaign_date mb-4">
         <div class="row mb-2">
-
-          <%- if @campaign.start_date > Date.today %>
+          <% if @campaign.start_date > Date.today %>
             <div class="col qa-time_until_start">
-              <span><%= t '.time_until_start', time: distance_of_time_in_words(@campaign.start_date, Date.today) %>
+              <span>
+                <%= t '.time_until_start', time: distance_of_time_in_words(@campaign.start_date, Date.today) %>
+              </span>
             </div>
           <% end %>
-
         </div>
 
         <div class="row mb-2">
           <div class="col-2"><strong><%= t '.start' %></strong></div>
           <div class="col"><%= I18n.l @campaign.start_date %></div>
         </div>
+
         <div class="row mb-2">
           <div class="col-2"><strong><%= t '.end' %></strong></div>
           <div class="col"><%= I18n.l @campaign.end_date %></div>

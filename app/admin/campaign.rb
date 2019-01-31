@@ -1,8 +1,8 @@
 ActiveAdmin.register Campaign do
-#
   permit_params :goal, :start_date, :end_date, :title, :youtube_url,
     :description, :claim, :twitter_url, :facebook_url,
-    :order_description, :order_success, :email, :image, :active
+    :order_description, :order_success, :email, :campaign_image,
+    :landing_page_image, :active
 
   # friendly_id resource lookup
   controller do
@@ -14,7 +14,6 @@ ActiveAdmin.register Campaign do
     def scoped_collection
       super.unscoped
     end
-
   end
 
   index do
@@ -27,7 +26,6 @@ ActiveAdmin.register Campaign do
     column :updated_at
     actions
   end
-#
 
   form do |f|
     inputs do
@@ -36,7 +34,8 @@ ActiveAdmin.register Campaign do
       input :claim, label: 'Claim (I18n)'
       input :goal
       input :email
-      input :image
+      input :campaign_image, as: :file
+      input :landing_page_image, as: :file
       input :start_date
       input :end_date
       input :youtube_url, label: 'Youtube URL (I18n)'

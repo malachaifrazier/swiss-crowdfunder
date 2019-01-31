@@ -62,4 +62,11 @@ Rails.application.configure do
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 
   config.action_mailer.delivery_method = :letter_opener
+
+  # Host for links sent via e-mail by Action Mailer
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # If using a Vagrant VM for development, allow the host machine to see the
+  # detailed exceptions provided by the better-errors gem
+  BetterErrors::Middleware.allow_ip! '10.0.2.2'
+  config.web_console.whiny_requests = false
 end

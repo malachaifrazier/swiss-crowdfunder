@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*any', via: :all, to: 'errors#not_found'
+  # get '*any', via: :all, to: 'errors#not_found'
 
   root to: 'root#index'
 end
