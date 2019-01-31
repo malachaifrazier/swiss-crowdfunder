@@ -236,6 +236,9 @@ GEM
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
+    image_processing (1.7.1)
+      mini_magick (~> 4.0)
+      ruby-vips (>= 2.0.13, < 3)
     inherited_resources (1.9.0)
       actionpack (>= 4.2, < 5.3)
       has_scope (~> 0.6)
@@ -383,6 +386,8 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    ruby-vips (2.0.13)
+      ffi (~> 1.9)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
     sass (3.7.3)
@@ -493,6 +498,7 @@ DEPENDENCIES
   guard-livereload (~> 2.5)
   guard-rspec
   httparty
+  image_processing (~> 1.7, >= 1.7.1)
   jbuilder (~> 2.5)
   jquery-rails
   launchy
