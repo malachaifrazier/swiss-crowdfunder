@@ -38,7 +38,7 @@ end
 
 Capybara.javascript_driver = :selenium
 Capybara.asset_host        = 'http://localhost:3000'
-Capybara.server            = :webrick
+Capybara.server            = :puma
 
 # Avoids problems related to config.action_mailer.default_url_options  when
 # trying to follow links in e-mails
