@@ -12,6 +12,19 @@ FactoryBot.define do
     end_date { 40.days.from_now }
     youtube_url { 'https://www.youtube.com/watch?v=ZUgjm-XqKuc' }
     goal { 1000 }
+
+    after(:build) do |campaign|
+      campaign.landing_page_image.attach(
+        io: File.open(Rails.root.join('spec', 'factories', 'images', 'yurt.jpeg')),
+        filename: 'yurt.jpeg',
+        content_type: 'image/jpeg'
+      )
+      campaign.campaign_image.attach(
+        io: File.open(Rails.root.join('spec', 'factories', 'images', 'yurt.jpeg')),
+        filename: 'yurt.jpeg',
+        content_type: 'image/jpeg'
+      )
+    end
   end
 
   factory :goody do

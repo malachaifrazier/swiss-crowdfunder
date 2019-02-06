@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'landing page', :type => :feature do
+describe 'landing page', type: :feature do
   it 'shows the landing page' do
     visit root_path
     expect(page).to have_content 'Swiss Crowdfunder'
@@ -10,6 +10,8 @@ describe 'landing page', :type => :feature do
     FactoryBot.create :campaign, title: 'Spec 1 Campaign', active: true
     FactoryBot.create :campaign, title: 'Spec 2 Campaign', active: false
 
+    # @post.image.attach(params.dig(:post, :image)
+
     visit root_path
     expect(page).to have_content 'Spec 1 Campaign'
     expect(page).to_not have_content 'Spec 2 Campaign'
@@ -17,8 +19,7 @@ describe 'landing page', :type => :feature do
 
 end
 
-describe 'global errors', :type => :feature do
-
+describe 'global errors', type: :feature do
   it 'shows a 404 page for unknown URLs' do
     visit '/certainly_not_a_valid_page'
     expect(page).to have_content I18n.t('errors.not_found.page_not_found_1')

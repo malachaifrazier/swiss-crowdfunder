@@ -48,11 +48,11 @@ describe 'layout application', :type => :feature do
       expect(page.status_code).to eq(200)
     end
 
-    it 'provides the default locale if a random locale is given' do
+    it 'provides the default locale (:en) if a random locale is given' do
       visit campaign_path(@campaign, locale: :i_totally_provide_a_random_locale)
-      expect(page).to have_content('Finanzierungsziel')
+      expect(page).to have_content('Funding goal')
       expect(page.status_code).to eq(200)
     end
-
   end
+
 end
