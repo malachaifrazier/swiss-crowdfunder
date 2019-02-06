@@ -140,7 +140,7 @@ describe 'campaigns', type: :feature do
           fill_in I18n.t('orders.new.street'), with: 'Spec Street'
           fill_in I18n.t('orders.new.postal_code'), with: '12345'
           fill_in I18n.t('orders.new.city'), with: 'Glarus'
-          select 'Schweiz', from: I18n.t('orders.new.country')
+          select 'Switzerland', from: I18n.t('orders.new.country')
           select '1950', from: 'order_supporter_attributes_date_of_birth_1i'
           find('.qa-agreement').click
           find('.qa-submit').click
