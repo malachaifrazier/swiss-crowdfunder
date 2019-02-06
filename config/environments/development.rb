@@ -63,6 +63,8 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :letter_opener
 
+  config.sass.inline_source_maps = true
+
   # Host for links sent via e-mail by Action Mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # If using a Vagrant VM for development, allow the host machine to see the
