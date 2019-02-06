@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
-
   def set_locale
     I18n.locale = if %w[de en].include?(params[:locale])
                     params[:locale]
