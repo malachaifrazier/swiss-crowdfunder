@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'static/about-us', to: 'static#about_us'
   get 'static/terms-of-service', to: 'static#terms_of_service'
   get 'static/privacy-policy', to: 'static#privacy_policy'
@@ -14,7 +13,10 @@ Rails.application.routes.draw do
     end
   end
 
-  # get '*any', via: :all, to: 'errors#not_found'
+  if Rails.env == "production" or Rails.env == "test"
+    # Show 404 page when testing or in production
+    get '*any', via: :all, to: 'errors#not_found'
+  end
 
   root to: 'root#index'
 end
