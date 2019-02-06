@@ -21,39 +21,63 @@
 %>
       <%= link_to campaign.title, campaign_path(campaign), class: "campaign_card_title" %>
       <div class="campaign_card_claim d-block mb-3"><%= campaign.claim %></div>
+
+      <div class="campaign_stat mb-2">
+        <span class="number">
+          <%= number_to_currency(campaign.amount_raised, precision: 0) %>
+        </span>
+        USD <%= t('.raised') %>
+        <strong class="text_theme float-right">
+          <%= campaign_percentage(campaign) %>
+        </strong>
+      </div>
+
       <div class="progress progress_thin mb-1">
         <div class="progress-bar bg_theme" role="progressbar"
           style="width: <%= campaign_percentage(campaign) %>;"
           aria-valuenow="<%= campaign.amount_raised %>" aria-valuemin="0" aria-valuemax="<%= campaign.goal %>">
         </div>
       </div>
-      <div class="row">
-        <div class="col-auto">
-          <strong class="text_theme"><%= campaign_percentage(campaign) %></strong>
-        </div>
-        <div class="col text-right funding_goal">
-          <div class="small mt-1"><%= t '.funding_goal' %></div>
-          <strong><%= number_to_currency(campaign.goal, precision: 0) %></strong>
-        </div>
-      </div>
 
-      <div class="campaign_stat mb-2">
-        <span class="number"><%= number_to_currency(campaign.amount_raised, precision: 0) %></span> <%= t('.raised') %>
+      <div class="row">
+        <!-- <div class="col-auto">
+          <strong class="text_theme"><%#= campaign_percentage(campaign) %></strong>
+        </div> -->
+
+        <!-- <div class="col text-right funding_goal">
+          <div class="small mt-1">
+            <%#= t '.funding_goal' %>
+          </div>
+          <strong>
+            <%#= number_to_currency(campaign.goal, precision: 0) %>
+          </strong>
+        </div> -->
       </div>
 
       <div class="campaign_date">
-        <div class="row">
-          <div class="col-3"><strong><%= campaign.supporters.count %></strong></div>
-          <div class="col"><small><%= t('.supporters') %></small></div>
-        </div>
-        <div class="row">
-          <div class="col-3"><strong><%= t '.start' %></strong></div>
-          <div class="col"><%= I18n.l campaign.start_date %></div>
-        </div>
-        <div class="row">
-          <div class="col-3"><strong><%= t '.end' %></strong></div>
-          <div class="col"><%= I18n.l campaign.end_date %></div>
-        </div>
+        <span>
+          <strong>
+            <%= campaign.days_left %>
+          </strong>
+        </span>
+
+        <!-- <div class="row">
+          <div class="col-5">
+            <strong><%#= t('.supporters') %></strong>
+          </div>
+          <div class="col">
+            <small><%#= campaign.supporters.count %></small>
+          </div>
+        </div> -->
+
+        <!-- <div class="row">
+          <div class="col-5">
+            <strong><%#= t '.start' %></strong>
+          </div>
+          <div class="col">
+            <%#= I18n.l campaign.start_date %>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>

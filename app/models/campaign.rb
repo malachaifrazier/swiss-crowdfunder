@@ -16,19 +16,18 @@ class Campaign < ApplicationRecord
 
   default_scope { where(active: true) }
 
-  has_many :goodies, dependent: :destroy
+  has_many :goodies,    dependent: :destroy
   has_many :supporters, through: :goodies
-  has_many :orders, through: :goodies
+  has_many :orders,     through: :goodies
 
   validates_presence_of :description, :title, :claim
   validates :goal, numericality: true, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
+  validate  :end_date, :is_end_before_start?
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
-  validate :end_date, :is_end_before_start?
 
   before_save :use_youtube_embedd_url
-
   before_save :convert_descriptions
 
   def amount_raised
@@ -40,6 +39,25 @@ class Campaign < ApplicationRecord
   def is_active?
     start_date <= Date.today &&
     end_date >= Date.today
+  end
+
+  def days_left
+    if end_date and end_date < DateTime.now.to_date
+      'Ended ' << integer_end_date.abs.to_s.concat(' Days Ago')
+      # ' and ended' << DateTime.now.advance(days: integer_end_date).concat(' Days Ago')
+    elsif !end_date
+      'Has not started yet'
+    else
+      integer_end_date.to_s.concat(' Days Left')
+    end
+  end
+
+  def integer_end_date
+    if end_date.present?
+      (end_date - DateTime.now.to_date).to_i
+    else
+      0
+    end
   end
 
   private
