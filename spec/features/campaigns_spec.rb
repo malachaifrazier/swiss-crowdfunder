@@ -17,7 +17,6 @@ describe 'campaigns', type: :feature do
       quantity: 0
   end
 
-
   feature 'campaigns#show' do
     scenario 'renders' do
       visit campaign_path(@campaign)
@@ -61,7 +60,7 @@ describe 'campaigns', type: :feature do
     describe 'before the campaign starts' do
       scenario 'shows a human readable starts until time' do
         visit campaign_path(@campaign)
-        expect(page).to have_content 'Noch 3 Monate bis zum Start!'
+        expect(page).to have_content '3 months until start!'
         expect(page).to have_css '.qa-time_until_start'
       end
 

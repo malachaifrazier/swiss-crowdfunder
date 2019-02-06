@@ -2,11 +2,10 @@
   <div class="campaign_card">
 
     <%= link_to campaign_path(campaign) do %>
-      <% if campaign.landing_page_image.attached? %>
-        <%= image_tag campaign.landing_page_image.variant(resize: "350x176"),
-         class: "d-block w-100" %>
+      <% if campaign.campaign_image.attached? %>
+        <%= image_tag campaign.campaign_image.variant(resize: "350x176"), class: "d-block w-100 card-image" %>
       <% else %>
-        <%= image_tag 'http://via.placeholder.com/350x176', class: "mb-5" %>
+        <%= image_tag 'http://via.placeholder.com/350x176', class: "d-block w-100 card-image" %>
       <% end %>
     <% end %>
     <div class="campaign_card_content">

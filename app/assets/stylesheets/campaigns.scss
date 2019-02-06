@@ -1,6 +1,5 @@
 /* styles for the campaign page only */
 .campaign_links {
-
   .btn_card {
     font-size: 70%;
 
@@ -84,4 +83,9 @@
 
 .btn_theme {
   white-space: normal;
+}
+
+.card-image {
+  height: fit-content;
+  // height: 273px;
 }

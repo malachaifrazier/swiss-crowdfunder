@@ -2,7 +2,7 @@ class Campaign < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
   has_one_attached :campaign_image
-  has_one_attached :landing_page_image
+  # has_one_attached :landing_page_image
 
   translates :title,
              :description,
