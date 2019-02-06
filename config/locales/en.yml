@@ -2,7 +2,8 @@ en:
   number:
     currency:
       format:
-        unit: "CHF"
+        delimiter: ","
+        unit: "$"
   errors:
     not_found:
       page_not_found_1: "Page not found"
@@ -14,7 +15,7 @@ en:
       contact: "Contact"
       language: "Sprachauswahl"
       terms-of-service: "Terms of Service"
-      about-us: "About us"
+      about-us: "About Us"
   root:
     index:
       coming_soon: "Coming Soon!"
@@ -55,19 +56,19 @@ en:
       funding_goal: "Funding goal"
       funding_amount_raised: "We've reached"
       funding_supporters: "Number of supporters"
-      support_the_project: "Support the project"
+      support_the_project: "SUPPORT THIS"
       description: "Description"
       goodies: "Goodies"
-      start: "Start"
-      end: "End"
+      start: "Start Date"
+      end: "End Date"
       about: "About this campaign"
   shared:
     campaign_card:
-      funding_goal: "Funding goal"
+      funding_goal: "Funding Goal"
       raised: "raised"
-      supporters: "supporters"
-      start: "Start"
-      end: "End"
+      supporters: "Supporters"
+      start: "Start Date"
+      end: "End Date"
       glarnerpick: "Glarnerpick"
     goody:
       pledge: "Pledge"
