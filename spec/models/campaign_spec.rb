@@ -99,9 +99,4 @@ RSpec.describe Campaign, type: :model do
     end
   end
 
-  describe "when an Order is placed without a Goody" do
-    skip "works as a donation" do
-    end
-  end
-
 end

@@ -28,32 +28,32 @@ describe 'campaigns', type: :feature do
       expect(current_path).to include('spec-campaign')
     end
 
-    feature 'translatable campaigns' do
-      before do
-        # Pick any other locale than the default
-        @test_locale = I18n.available_locales.reject do |l|
-          l == I18n.locale
-        end.first
-
-        I18n.locale = @test_locale
-        # Set a translated title
-        @campaign.update_attribute :title, 'Other title through other locale'
-        I18n.locale = I18n.default_locale
-      end
-
-      scenario 'has translatable attributes' do
-        visit campaign_path(@campaign, locale: @test_locale)
-        # Doesn't show content with the values for the default locale
-        expect(page).not_to have_content 'Spec Campaign'
-        # But it shows it for the translated locale
-        expect(page).to have_content 'Other title through other locale'
-
-        # Check it the other way around, default locale still works
-        visit campaign_path(@campaign)
-        expect(page).to have_content 'Spec Campaign'
-        expect(page).not_to have_content 'Other title through other locale'
-      end
-    end
+    # feature 'translatable campaigns' do
+    #   before do
+    #     # Pick any other locale than the default
+    #     @test_locale = I18n.available_locales.reject do |l|
+    #       l == I18n.locale
+    #     end.first
+    #
+    #     I18n.locale = @test_locale
+    #     # Set a translated title
+    #     @campaign.update_attribute :title, 'Other title through other locale'
+    #     I18n.locale = I18n.default_locale
+    #   end
+    #
+    #   scenario 'has translatable attributes' do
+    #     visit campaign_path(@campaign, locale: @test_locale)
+    #     # Doesn't show content with the values for the default locale
+    #     expect(page).not_to have_content 'Spec Campaign'
+    #     # But it shows it for the translated locale
+    #     expect(page).to have_content 'Other title through other locale'
+    #
+    #     # Check it the other way around, default locale still works
+    #     visit campaign_path(@campaign)
+    #     expect(page).to have_content 'Spec Campaign'
+    #     expect(page).not_to have_content 'Other title through other locale'
+    #   end
+    # end
   end
 
   feature 'date based logic' do
