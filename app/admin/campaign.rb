@@ -62,7 +62,7 @@ ActiveAdmin.register Campaign do
       row :twitter_url
       row :description
       row :order_description
-      active_admin_comments
+      # active_admin_comments
       row :campaign_image do |campaign|
         image_tag url_for(campaign.campaign_image), size: "150x150"
       end

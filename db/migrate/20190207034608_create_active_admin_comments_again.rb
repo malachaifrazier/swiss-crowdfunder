@@ -1,0 +1,14 @@
+class CreateActiveAdminCommentsAgain < ActiveRecord::Migration[5.2]
+  def change
+    if !ActiveRecord::Base.connection.table_exists? 'active_admin_comments'
+      create_table :active_admin_comments do |t|
+        t.string :namespace
+        t.text   :body
+        t.references :resource, polymorphic: true
+        t.references :author, polymorphic: true
+        t.timestamps
+      end
+      add_index :active_admin_comments, [:namespace]
+    end
+  end
+end

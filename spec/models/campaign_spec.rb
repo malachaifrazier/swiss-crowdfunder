@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Campaign, type: :model do
-
   describe 'Scopes' do
     it 'has a default scope for "active campaigns"' do
       FactoryBot.create :campaign, active: false
@@ -10,7 +9,6 @@ RSpec.describe Campaign, type: :model do
   end
 
   describe 'Logic' do
-
     it 'has no supporters in the beginning' do
       campaign = FactoryBot.build :campaign
       expect(campaign.supporters.count).to eq(0)
@@ -27,16 +25,12 @@ RSpec.describe Campaign, type: :model do
 
     it 'forces the end date to be after the start date' do
       campaign = FactoryBot.build :campaign, start_date: Date.today, end_date: 100.days.before
-
       expect(campaign).to_not be_valid
       expect(campaign.errors.first).to eq([:end_date, 'End date has to be after the start date!'])
     end
-
-
   end
 
   describe 'Timing' do
-
     it 'is not active when the start is in the future' do
       campaign = FactoryBot.build :campaign, start_date: 100.days.from_now
       expect(campaign.is_active?).to eq(false)
@@ -67,13 +61,7 @@ RSpec.describe Campaign, type: :model do
         end_date: Date.today
       expect(campaign.is_active?).to eq(true)
     end
-
-
-
-
   end
-
-
 
   describe 'Amount raised' do
     it 'works for zero orders' do
@@ -108,6 +96,11 @@ RSpec.describe Campaign, type: :model do
       goody3.orders.create! payment_type: 'stripe', quantity: 1, amount: 40, agreement: true,
         supporter: supporter
       expect(campaign.amount_raised).to eq(80)
+    end
+  end
+
+  describe "when an Order is placed without a Goody" do
+    skip "works as a donation" do
     end
   end
 

@@ -30,6 +30,12 @@ class Campaign < ApplicationRecord
   before_save :use_youtube_embedd_url
   before_save :convert_descriptions
 
+  # after_create :create_donation_goodie
+
+  def create_donation_goodie
+    self.goody.create!(quantity: -1, price: 0)
+  end
+
   def amount_raised
     goodies.inject(0) do |sum, g|
       sum += g.orders ? g.orders.sum(&:amount) : sum
