@@ -1,19 +1,33 @@
 <% content_for :main_content_class do %>bg_grey<% end %>
 
 <div class="container">
+  <div class="alert alert-primary">
+    <p>
+      <b>The Risk of Crowdfunding:</b> <i>The payment you are about to make is
+      a contribution to the campaign and not a direct purchase!
+      Fundercove does not guarantee that the goodies offered will be produced or delivered.</i>
+      <span><%= link_to "Learn More", "#" %></span>
+    </p>
+  </div>
+
   <div class="mid_box">
     <div class="top_section mb-4">
-      <h1><%= t('.confirmation') %></h1>
+      <h1>
+        Order Confirmation
+      </h1>
+      <hr>
       <p>
         <%= t('.selected_package') %> <strong><%= @goody.title %></strong>.
       </p>
       <p>
-        <%= raw t('.i_hereby_acknowledge', price: @goody.price, currency: "CHF") %>
+        <%= raw t('.i_hereby_acknowledge', price: "$".concat(@goody.price.to_s), currency: "USD") %>
       </p>
     </div>
 
     <%= simple_form_for [@goody.campaign, @goody, @order] do |f| %>
       <%= f.simple_fields_for :supporter do |s| %>
+      <hr>
+      <h5>Shipping Address</h5>
         <div class="row">
           <div class="col-sm-6">
             <%= s.input :first_name, label: t('.first_name') %>
@@ -23,7 +37,11 @@
           </div>
         </div>
         <%= s.input :email, label: t('.email') %>
-        <%= s.input :date_of_birth, label: t('.date_of_birth'), as: :date, start_year: Date.today.year - 100, end_year: Date.today.year - 10  %>
+        <%= s.input :date_of_birth, label: t('.date_of_birth'),
+         as: :date, start_year: Date.today.year - 100, end_year: Date.today.year - 10  %>
+
+        <hr>
+        <h5>Shipping Address</h5>
         <%= s.input :street, label: t('.street') %>
         <div class="row">
           <div class="col-sm-4">
@@ -50,7 +68,8 @@
       <% end %>
 
       <div class="text-right mb-4">
-        <%= f.input :agreement, required: true, label: t('.i_agree').html_safe, input_html: { class: "qa-agreement" } %>
+        <%= f.input :agreement, required: true,
+         label: t('.i_agree').html_safe, input_html: { class: "qa-agreement" } %>
       </div>
       <div class="text-center">
         <%= f.submit t(".create_order"), class: "qa-submit btn btn_theme btn_wide" %>

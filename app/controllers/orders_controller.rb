@@ -28,9 +28,7 @@ class OrdersController < ApplicationController
     @order.build_supporter
   end
 
-  private
-
-  # Never trust parameters from the scary internet, only allow the white list through.
+private
   def order_params
     params.require(:order).permit(:agreement, supporter_attributes:
     [:first_name, :last_name, :email, :date_of_birth, :street,

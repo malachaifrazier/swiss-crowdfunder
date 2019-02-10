@@ -83,7 +83,7 @@ en:
       backers: "Backers: %{quantity}"
     donation:
       pledge: "Pledge"
-      price: "Name your own Donation amount in USD"
+      price: "Pledge your Donation amount in USD"
       quantity: "Quantity left: %{quantity}"
       backers: "Backers: %{quantity}"
   supporter:

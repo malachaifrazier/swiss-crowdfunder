@@ -12,6 +12,9 @@ class Order < ApplicationRecord
   validate :goody, :are_goodies_left?#,   unless: Proc.new { |order| order.is_donation? == true }
   validate :goody, :is_campaign_active?#, unless: Proc.new { |order| order.is_donation? == true }
 
+  # scope :successful, where(status: %w(authorized charged released rejected offline))
+  # scope :completed, where(status: %w(authorized charged released rejected refunded offline))
+
   # attr_accessor :is_donation
   #
   # def is_donation?
