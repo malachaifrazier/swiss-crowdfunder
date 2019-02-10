@@ -143,7 +143,7 @@ GEM
     database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     deep_merge (1.2.1)
-    devise (4.5.0)
+    devise (4.6.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -187,11 +187,11 @@ GEM
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
     execjs (2.7.0)
-    factory_bot (4.11.1)
-      activesupport (>= 3.0.0)
-    factory_bot_rails (4.11.1)
-      factory_bot (~> 4.11.1)
-      railties (>= 3.0.0)
+    factory_bot (5.0.0)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.0.1)
+      factory_bot (~> 5.0.0)
+      railties (>= 4.2.0)
     ffi (1.9.25)
     formatador (0.2.5)
     formtastic (3.1.5)
@@ -485,7 +485,7 @@ DEPENDENCIES
   database_cleaner
   devise
   exception_notification
-  factory_bot_rails (~> 4.11, >= 4.11.1)
+  factory_bot_rails
   friendly_id
   geckodriver-helper
   globalize
