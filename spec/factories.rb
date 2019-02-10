@@ -30,6 +30,13 @@ FactoryBot.define do
     campaign
   end
 
+  factory :donation do
+    sequence(:title) { |n| "Donation #{n}" }
+    description { 'Donations are not associated with Goodies.' }
+    quantity { -1 }
+    campaign
+  end
+
   factory :supporter do
     sequence(:first_name) { |n| "John, the #{n}" }
     last_name  { 'Doe' }

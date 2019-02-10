@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
-  belongs_to :goody, optional: true
+  belongs_to :goody,    optional: true
+  belongs_to :donation, optional: true
 
   has_one :supporter, dependent: :destroy
   accepts_nested_attributes_for :supporter
@@ -8,14 +9,14 @@ class Order < ApplicationRecord
   validates :agreement, presence: true
   validates :supporter, presence: true
 
-  validate :goody, :are_goodies_left?,   unless: Proc.new { |order| order.is_donation? == true }
-  validate :goody, :is_campaign_active?, unless: Proc.new { |order| order.is_donation? == true }
+  validate :goody, :are_goodies_left?#,   unless: Proc.new { |order| order.is_donation? == true }
+  validate :goody, :is_campaign_active?#, unless: Proc.new { |order| order.is_donation? == true }
 
-  attr_accessor :is_donation
-
-  def is_donation?
-    self.is_donation
-  end
+  # attr_accessor :is_donation
+  #
+  # def is_donation?
+  #   self.is_donation
+  # end
 
   def are_goodies_left?
     errors.add(:goody, 'No goodies left!') if goody.remaining_quantity == 0

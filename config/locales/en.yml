@@ -78,9 +78,14 @@ en:
       glarnerpick: "Glarnerpick"
     goody:
       pledge: "Pledge"
-      price: "Price :"
+      price: "Price:"
       quantity: "Quantity left: %{quantity}"
-      backers: "Backers : %{quantity}"
+      backers: "Backers: %{quantity}"
+    donation:
+      pledge: "Pledge"
+      price: "Name your own Donation amount in USD"
+      quantity: "Quantity left: %{quantity}"
+      backers: "Backers: %{quantity}"
   supporter:
     validation:
       not_old_enough: "Minimum age is 18"

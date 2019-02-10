@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_07_034608) do
+ActiveRecord::Schema.define(version: 2019_02_07_152723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,16 @@ ActiveRecord::Schema.define(version: 2019_02_07_034608) do
     t.index ["slug"], name: "index_campaigns_on_slug", unique: true
   end
 
+  create_table "donations", force: :cascade do |t|
+    t.string "title", default: "Donation"
+    t.text "description", default: "Donations are not associated with Goodies."
+    t.integer "quantity", default: -1
+    t.bigint "campaign_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_donations_on_campaign_id"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -151,6 +161,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_034608) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "agreement"
+    t.bigint "donation_id"
     t.index ["goody_id"], name: "index_orders_on_goody_id"
   end
 
@@ -171,6 +182,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_034608) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "donations", "campaigns"
   add_foreign_key "goodies", "campaigns"
   add_foreign_key "orders", "goodies"
   add_foreign_key "supporters", "orders"

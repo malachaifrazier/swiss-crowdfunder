@@ -22,7 +22,6 @@ class OrdersController < ApplicationController
     @goody = Goody.find(params[:goody_id])
   end
 
-
   def new
     @goody = Goody.find(params[:goody_id])
     @order = Order.new goody: @goody

@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  context "when an Order is placed without a Goody" do
-    describe "it works as a donation" do
+  context "when a Donation is placed" do
+    describe "it can be created" do
       it "and can be accepted" do
-        FactoryBot.create :campaign, start_date: DateTime.now.to_date
-        order = FactoryBot.build :order, goody: nil, is_donation: true
+        campaign = FactoryBot.create :campaign
+        donation = FactoryBot.create :donation, campaign: campaign
+        order = FactoryBot.build :order, donation: donation
         expect(order).to be_valid
       end
     end

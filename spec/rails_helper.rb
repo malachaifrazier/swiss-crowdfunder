@@ -14,6 +14,14 @@ require 'devise'
 require 'bundler/setup'
 ::Bundler.require(:default, :test)
 
+require 'shoulda/matchers'
+::Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 # ---------------------- Begin Capybara configurations ----------------------
 Capybara.register_driver :selenium do |app|
   if ENV['SELENIUM_DRIVER_URL'].present?

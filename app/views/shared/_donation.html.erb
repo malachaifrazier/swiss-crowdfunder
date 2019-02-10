@@ -1,0 +1,30 @@
+<section class="card side_card">
+  <div class="card-body">
+    <h4 class="card-title">
+      <%= donation.title %>
+    </h4>
+    <p class="card-text">
+      <%= donation.description %>
+    </p>
+    <p class="card_point">
+      <%= t(".quantity", quantity: donation.remaining_quantity) %>
+    </p>
+    <p class="card_point">
+      <%= t(".backers", quantity: campaign.donations.count) %>
+    </p>
+    <hr>
+
+    <div class="card_action d-flex justify-content-between align-items-center flex-wrap">
+      <div class="wrap_top">
+        <strong><%= t(".price") %></strong>
+      </div>
+      <div class="text-right wrap_bottom">
+        <%#= link_to t(".pledge"), new_campaign_donation_order_path(@campaign, donation),
+              class:"btn btn_faded btn_bottom qa-pledge" %>
+        <%= link_to 'Donate', '#',
+              class:"btn btn_faded btn_bottom qa-donate" %>
+      </div>
+    </div>
+  </div>
+
+</section>

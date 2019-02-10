@@ -2,6 +2,7 @@ class GoodiesController < ApplicationController
   before_action :set_goodies, only: [:index]
 
   def index
+    @donation = @campaign.donations.build()
   end
 
   private

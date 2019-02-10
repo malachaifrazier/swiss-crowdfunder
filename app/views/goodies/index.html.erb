@@ -8,6 +8,11 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <%= render partial: 'shared/donation',
+       locals: { campaign: @campaign, donation: @donation } %>
+    </div>
+
     <% @goodies.each do |goody| %>
       <div class="col-sm-6 col-md-4">
         <%= render partial: 'shared/goody', locals: { goody: goody } %>

@@ -17,6 +17,7 @@ class Campaign < ApplicationRecord
   default_scope { where(active: true) }
 
   has_many :goodies,    dependent: :destroy
+  has_many :donations,  dependent: :destroy
   has_many :supporters, through: :goodies
   has_many :orders,     through: :goodies
 
@@ -30,14 +31,8 @@ class Campaign < ApplicationRecord
   before_save :use_youtube_embedd_url
   before_save :convert_descriptions
 
-  # after_create :create_donation_goodie
-
-  def create_donation_goodie
-    self.goody.create!(quantity: -1, price: 0)
-  end
-
   def amount_raised
-    goodies.inject(0) do |sum, g|
+    (self.goodies + self.donations).inject(0) do |sum, g|
       sum += g.orders ? g.orders.sum(&:amount) : sum
     end
   end
